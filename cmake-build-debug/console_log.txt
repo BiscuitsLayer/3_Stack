@@ -1,0 +1,125 @@
+Dump #1 (Stack Initialized) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (31) Stack_t StackInit():
+Stack_t [stk] {
+	size = 0;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		  [0] = N;
+		  [1] = N;
+		  [2] = N;
+		  [3] = N;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #2 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+Stack_t [stk] {
+	size = 1;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		  [1] = N;
+		  [2] = N;
+		  [3] = N;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #3 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+Stack_t [stk] {
+	size = 2;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		* [1] = b;
+		  [2] = N;
+		  [3] = N;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #4 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+Stack_t [stk] {
+	size = 3;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		* [1] = b;
+		* [2] = c;
+		  [3] = N;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #5 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+Stack_t [stk] {
+	size = 4;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		* [1] = b;
+		* [2] = c;
+		* [3] = d;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #6 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+Stack_t [stk] {
+	size = 5;
+	maxsize = 10;
+	pk1 = deadbeef;
+	data [10] {
+		* [0] = a;
+		* [1] = b;
+		* [2] = c;
+		* [3] = d;
+		* [4] = e;
+		  [5] = N;
+		  [6] = N;
+		  [7] = N;
+		  [8] = N;
+		  [9] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #7 (Element Popped) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (83) Elem_t StackPop(Stack_t*):
+Stack_t [stk] {
+	size = 4;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		* [1] = b;
+		* [2] = c;
+		* [3] = d;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+
+Dump #8 (End Program) from C:\Users\Admin\CLionProjects\3_Stack\main.cpp (14) int main():
+Stack_t [stk] {
+	size = 4;
+	maxsize = 5;
+	pk1 = deadbeef;
+	data [5] {
+		* [0] = a;
+		* [1] = b;
+		* [2] = c;
+		* [3] = d;
+		  [4] = N;
+	}
+	pk2 = beefdead;
+}
+

@@ -86,6 +86,12 @@
 		<Unit filename="C:/Users/Admin/CLionProjects/3_Stack/cmake-build-debug/StackLib.h">
 			<Option target="3_Stack"/>
 		</Unit>
+		<Unit filename="C:/Users/Admin/CLionProjects/3_Stack/cmake-build-debug/Torture.cpp">
+			<Option target="3_Stack"/>
+		</Unit>
+		<Unit filename="C:/Users/Admin/CLionProjects/3_Stack/cmake-build-debug/Torture.h">
+			<Option target="3_Stack"/>
+		</Unit>
 		<Unit filename="C:/Users/Admin/CLionProjects/3_Stack/main.cpp">
 			<Option target="3_Stack"/>
 		</Unit>

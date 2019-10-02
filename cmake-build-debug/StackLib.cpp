@@ -1,4 +1,5 @@
-#include <stdio.h>
+#pragma once
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <stdexcept>
@@ -17,8 +18,8 @@ Stack_t StackInit () {
     Stack_t stk = {};
     stk.size = 0, stk.maxsize = DELTA_2, stk.dump_count = 0;
     stk.data = (Elem_t *) calloc (2 * PK_LEN + DELTA_2, sizeof (Elem_t));
-    stk.pk1 = reinterpret_cast <Parkour_t *> (stk.data), *stk.pk1 = 0xDEADBEEF;
-    stk.pk2 = reinterpret_cast <Parkour_t *> (stk.data + PK_LEN + stk.maxsize), *stk.pk2 = 0xBEEFDEAD;
+    stk.pk1 = (Parkour_t *) (stk.data), *stk.pk1 = 0xDEADBEEF;
+    stk.pk2 = (Parkour_t *) (stk.data + PK_LEN + stk.maxsize), *stk.pk2 = 0xBEEFDEAD;
     stk.data += PK_LEN;
     StackFillWithPoison (&stk, 0, DELTA_2 - 1);
     stk.hashcode = Hash (&stk);
@@ -72,7 +73,7 @@ Elem_t StackPop (Stack_t *stk) {
         StackFillWithPoison (stk, stk->size, stk->size);
         stk->hashcode = Hash (stk);
 
-        if (stk->maxsize - stk->size >= DELTA_1 + DELTA_2)
+        if (stk->maxsize - stk->size >= 2 * DELTA_2)
             StackResize (stk, -DELTA_2);
 
         StackOK (stk);
@@ -91,8 +92,8 @@ void StackResize (Stack_t *stk, size_t delta_size) {
         memmove(new_data + PK_LEN, stk->data, stk->maxsize * sizeof(Elem_t));
         stk->data = new_data + PK_LEN;
         StackFillWithPoison (stk, stk->size, stk->maxsize);
-        stk->pk1 = reinterpret_cast<Parkour_t *> (new_data), *stk->pk1 = 0xDEADBEEF;
-        stk->pk2 = reinterpret_cast<Parkour_t *> (new_data + PK_LEN + stk->maxsize), *stk->pk2 = 0xBEEFDEAD;
+        stk->pk1 = (Parkour_t *) (new_data), *stk->pk1 = 0xDEADBEEF;
+        stk->pk2 = (Parkour_t *) (new_data + PK_LEN + stk->maxsize), *stk->pk2 = 0xBEEFDEAD;
         stk->hashcode = Hash(stk);
     }
 }
@@ -133,7 +134,7 @@ void StackDestruct (Stack_t *stk) {
 //! \return Хэш - сумма
 
 unsigned int Hash (Stack_t *stk) {
-    char *key = reinterpret_cast <char *> (stk->pk1);
+    char *key = (char *) (stk->pk1);
     unsigned int len = (stk->pk2 - stk->pk1) * sizeof (char);
 
     const unsigned int m = 0x5bd1e995;
@@ -187,18 +188,28 @@ unsigned int Hash (Stack_t *stk) {
 //! \param func Название функции вызова
 
 void StackDump (Stack_t *stk, const char *reason, const char *file, int line, const char *func) {
+    if (stk == nullptr) {
+        fprintf(console_log, "Dump #%d (%s) from %s (%d) %s:\n", 0, reason, file, line, func);
+        return;
+    }
     stk->dump_count++;
     fprintf (console_log, "Dump #%d (%s) from %s (%d) %s:\n", stk->dump_count, reason, file, line, func);
     fprintf (console_log, "Stack_t [%s] {\n", _NAME_OF_ARG_ (stk));
     fprintf (console_log, "\tsize = %d;\n", stk->size);
     fprintf (console_log, "\tmaxsize = %d;\n", stk->maxsize);
-    fprintf (console_log, "\tpk1 = %x;\n", *stk->pk1);
+    if (stk->pk1 == nullptr)
+        fprintf (console_log, "\tpk1 = NULL;\n");
+    else
+        fprintf (console_log, "\tpk1 = %x;\n", *stk->pk1);
     fprintf (console_log, "\tdata [%d] {\n", stk->maxsize);
     for (int i = 0; i < stk->maxsize; ++i) {
         fprintf (console_log, i < stk->size ? "\t\t* " : "\t\t  ");
         fprintf (console_log, DATA_OUTPUT_FORMAT, i, (stk->data)[i]);
     }
-    fprintf (console_log, "\t}\n\tpk2 = %x;\n}", *stk->pk2);
+    if (stk->pk2 == nullptr)
+        fprintf (console_log, "\tpk2 = NULL;\n");
+    else
+        fprintf (console_log, "\t}\n\tpk2 = %x;\n}", *stk->pk2);
     fprintf (console_log, "\n\n");
 }
 
@@ -212,7 +223,7 @@ void StackOK (Stack_t *stk) {
     if (stk->maxsize < 0) throw RE ("ERROR: Stack size is less than 0");
     if (stk->maxsize < stk->size) throw RE ("ERROR: Stack index is greater than stack size");
     if (stk->dump_count < 0) throw RE ("ERROR: Stack dump counter is less than 0");
-    if (stk->data == nullptr) throw RE ("ERROR: Stack pointer equals NULL");
+    if (stk->data == nullptr) throw RE ("ERROR: Stack data pointer equals NULL");
     if (stk->pk1 == nullptr) throw RE ("ERROR: Stack's first canary pointer equals NULL");
     if (stk->pk2 == nullptr) throw RE ("ERROR: Stack's second canary pointer equals NULL");
     if (*stk->pk1 != 0xDEADBEEF) throw RE ("ERROR: Stack's first canary value has been changed");
@@ -230,15 +241,15 @@ void StackOK (Stack_t *stk) {
 void StackPtrDump (Stack_t *stk, const char *reason, const char *file, int line, const char *func) {
     stk->dump_count++;
     fprintf (console_log, "PtrDump #%d (%s) from %s (%d) %s:\n", stk->dump_count, reason, file, line, func);
-    fprintf (console_log, "Stack_t [%d] {\n", stk);
-    fprintf (console_log, "\tsize = %d;\n", &stk->size);
-    fprintf (console_log, "\tmaxsize = %d;\n", &stk->maxsize);
-    fprintf (console_log, "\tpk1 = %d;\n", stk->pk1);
-    fprintf (console_log, "\tdata [%d] {\n", stk->data);
+    fprintf (console_log, "Stack_t [%p] {\n", stk);
+    fprintf (console_log, "\tsize = %p;\n", &stk->size);
+    fprintf (console_log, "\tmaxsize = %p;\n", &stk->maxsize);
+    fprintf (console_log, "\tpk1 = %p;\n", stk->pk1);
+    fprintf (console_log, "\tdata [%p] {\n", stk->data);
     for (int i = 0; i < stk->maxsize; ++i) {
         fprintf (console_log, i < stk->size ? "\t\t* " : "\t\t  ");
-        fprintf (console_log, "[%d] = %d;\n", i, (stk->data) + i);
+        fprintf (console_log, "[%d] = %p;\n", i, (stk->data) + i);
     }
-    fprintf (console_log, "\t}\n\tpk2 = %d;\n}", stk->pk2);
+    fprintf (console_log, "\t}\n\tpk2 = %p;\n}", stk->pk2);
     fprintf (console_log, "\n\n");
 }

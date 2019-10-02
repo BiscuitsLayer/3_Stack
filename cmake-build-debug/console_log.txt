@@ -1,124 +1,44 @@
-Dump #1 (Stack Initialized) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (31) Stack_t StackInit():
+Dump #1 (Stack Initialized) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (32) Stack_t StackInit():
 Stack_t [stk] {
 	size = 0;
 	maxsize = 5;
 	pk1 = deadbeef;
 	data [5] {
-		  [0] = N;
-		  [1] = N;
-		  [2] = N;
-		  [3] = N;
-		  [4] = N;
+		  [0] = 666;
+		  [1] = 666;
+		  [2] = 666;
+		  [3] = 666;
+		  [4] = 666;
 	}
 	pk2 = beefdead;
 }
 
-Dump #2 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
+PtrDump #2 (Pointer Dump Test) from C:\Users\Admin\CLionProjects\3_Stack\main.cpp (7) int main():
+Stack_t [0061FEFC] {
+	size = 0061FEFC;
+	maxsize = 0061FF00;
+	pk1 = 00F21438;
+	data [00F21440] {
+		  [0] = 00F21440;
+		  [1] = 00F21444;
+		  [2] = 00F21448;
+		  [3] = 00F2144C;
+		  [4] = 00F21450;
+	}
+	pk2 = 00F21454;
+}
+
+Dump #3 (ERROR: Stack's first canary value has been changed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (109) size_t StackGetSize(Stack_t*):
 Stack_t [stk] {
-	size = 1;
+	size = 0;
 	maxsize = 5;
-	pk1 = deadbeef;
+	pk1 = bedab0da;
 	data [5] {
-		* [0] = a;
-		  [1] = N;
-		  [2] = N;
-		  [3] = N;
-		  [4] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #3 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
-Stack_t [stk] {
-	size = 2;
-	maxsize = 5;
-	pk1 = deadbeef;
-	data [5] {
-		* [0] = a;
-		* [1] = b;
-		  [2] = N;
-		  [3] = N;
-		  [4] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #4 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
-Stack_t [stk] {
-	size = 3;
-	maxsize = 5;
-	pk1 = deadbeef;
-	data [5] {
-		* [0] = a;
-		* [1] = b;
-		* [2] = c;
-		  [3] = N;
-		  [4] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #5 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
-Stack_t [stk] {
-	size = 4;
-	maxsize = 5;
-	pk1 = deadbeef;
-	data [5] {
-		* [0] = a;
-		* [1] = b;
-		* [2] = c;
-		* [3] = d;
-		  [4] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #6 (Element Pushed) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (59) void StackPush(Stack_t*, Elem_t):
-Stack_t [stk] {
-	size = 5;
-	maxsize = 10;
-	pk1 = deadbeef;
-	data [10] {
-		* [0] = a;
-		* [1] = b;
-		* [2] = c;
-		* [3] = d;
-		* [4] = e;
-		  [5] = N;
-		  [6] = N;
-		  [7] = N;
-		  [8] = N;
-		  [9] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #7 (Element Popped) from C:\Users\Admin\CLionProjects\3_Stack\cmake-build-debug\StackLib.cpp (83) Elem_t StackPop(Stack_t*):
-Stack_t [stk] {
-	size = 4;
-	maxsize = 5;
-	pk1 = deadbeef;
-	data [5] {
-		* [0] = a;
-		* [1] = b;
-		* [2] = c;
-		* [3] = d;
-		  [4] = N;
-	}
-	pk2 = beefdead;
-}
-
-Dump #8 (End Program) from C:\Users\Admin\CLionProjects\3_Stack\main.cpp (14) int main():
-Stack_t [stk] {
-	size = 4;
-	maxsize = 5;
-	pk1 = deadbeef;
-	data [5] {
-		* [0] = a;
-		* [1] = b;
-		* [2] = c;
-		* [3] = d;
-		  [4] = N;
+		  [0] = 666;
+		  [1] = 666;
+		  [2] = 666;
+		  [3] = 666;
+		  [4] = 666;
 	}
 	pk2 = beefdead;
 }

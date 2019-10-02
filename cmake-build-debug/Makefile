@@ -149,6 +149,33 @@ StackLib.cpp.s:
 	$(MAKE) -f CMakeFiles\3_Stack.dir\build.make CMakeFiles/3_Stack.dir/StackLib.cpp.s
 .PHONY : StackLib.cpp.s
 
+Torture.obj: Torture.cpp.obj
+
+.PHONY : Torture.obj
+
+# target to build an object file
+Torture.cpp.obj:
+	$(MAKE) -f CMakeFiles\3_Stack.dir\build.make CMakeFiles/3_Stack.dir/Torture.cpp.obj
+.PHONY : Torture.cpp.obj
+
+Torture.i: Torture.cpp.i
+
+.PHONY : Torture.i
+
+# target to preprocess a source file
+Torture.cpp.i:
+	$(MAKE) -f CMakeFiles\3_Stack.dir\build.make CMakeFiles/3_Stack.dir/Torture.cpp.i
+.PHONY : Torture.cpp.i
+
+Torture.s: Torture.cpp.s
+
+.PHONY : Torture.s
+
+# target to generate assembly for a file
+Torture.cpp.s:
+	$(MAKE) -f CMakeFiles\3_Stack.dir\build.make CMakeFiles/3_Stack.dir/Torture.cpp.s
+.PHONY : Torture.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -188,6 +215,9 @@ help:
 	@echo ... StackLib.obj
 	@echo ... StackLib.i
 	@echo ... StackLib.s
+	@echo ... Torture.obj
+	@echo ... Torture.i
+	@echo ... Torture.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

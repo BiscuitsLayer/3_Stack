@@ -1,13 +1,14 @@
+#pragma once
 #include <cstddef>
 
 #define LOCATION __FILE__, __LINE__, __PRETTY_FUNCTION__
-#define DATA_OUTPUT_FORMAT "[%d] = %c;\n"
-#define POISON 'N'
+#define DATA_OUTPUT_FORMAT "[%d] = %d;\n"
+#define POISON 666
 
 //#define console_log stdout
 
 typedef long long int Parkour_t;
-typedef char Elem_t;
+typedef int Elem_t;
 typedef struct {
     int size = 0, maxsize = 0, dump_count = 0;
     Parkour_t *pk1 = nullptr;

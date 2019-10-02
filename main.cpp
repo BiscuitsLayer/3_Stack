@@ -1,17 +1,20 @@
 #include "cmake-build-debug/StackLib.h"
+#include "cmake-build-debug/Torture.h"
 
 int main () {
-    Stack_t stk = StackInit ();
+    Torture_t torture;
+    torture.stk = StackInit ();
+    StackPtrDump (&torture.stk, "Pointer Dump Test", LOCATION);
 
-    StackPush(&stk, 'a');
-    StackPush(&stk, 'b');
-    StackPush(&stk, 'c');
-    StackPush(&stk, 'd');
-    StackPush(&stk, 'e');
+    //FirstParkourChange (&torture);
+    //SecondParkourChange (&torture);
+    //FirstParkourNULL (&torture);
+    //SecondParkourNULL (&torture);
+    //HashChange (&torture);
+    //ExtraPop (&torture);
+    //StackPtrNULL (&torture);
 
-    Elem_t ans = StackPop (&stk);
-
-    StackDump (&stk, "End Program", LOCATION);
-
-    StackDestruct (&stk);
+    size_t sz = StackGetSize (&torture.stk);
+    StackDump (&torture.stk, "End Program", LOCATION);
+    StackDestruct (&torture.stk);
 }
